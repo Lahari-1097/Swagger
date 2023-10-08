@@ -1,3 +1,4 @@
+const axios = require('axios');
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
@@ -216,6 +217,14 @@ app.delete('/prices/:name', (req, res) => {
 
   prices.shoes.splice(itemIndex, 1);
   res.status(204).end();
+});
+app.get('/say', (req, res) => {
+  const keyword= req.query.keyword
+  console.log(keyword)
+  axios.get(`https://la8qeee9df.execute-api.us-east-2.amazonaws.com/test/helloworld?keyword=${keyword}`)
+   .then((response)=>{
+    res.send(response.data);
+  })
 });
 
 app.listen(port, () => {
